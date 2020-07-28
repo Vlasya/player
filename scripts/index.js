@@ -12,6 +12,7 @@ const deactivationPlayer =()=>{
 	playerBlock.forEach((item)=>{item.classList.remove('active')});
 }
 
+
 playerBtn.forEach((btn,i) => {
 	btn.addEventListener('click', () => {
 		deactivationPlayer();
