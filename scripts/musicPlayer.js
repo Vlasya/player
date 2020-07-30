@@ -32,7 +32,7 @@ export const musicPlayerInit=()=>{
 	};
 
 	const prevTrack = () =>{
-		if(trackIndex !== 0){
+		if (trackIndex !== 0) {
 			trackIndex--;
 		}else{
 			trackIndex = playlist.length -1;
@@ -62,13 +62,14 @@ export const musicPlayerInit=()=>{
 
 			if (audioPlayer.paused){
 				audioPlayer.play();
-			}else{
-				audioPlayer.pause(); || '00'
+			} else{
+				audioPlayer.pause();
 			}
 			const track = playlist[trackIndex];
 			audioHeader.textContent = track;
 		}
 		if(target.classList.contains('audio-button__prev')){
+			
 			prevTrack();
 		}
 		if(target.classList.contains('audio-button__next')){
@@ -88,13 +89,22 @@ export const musicPlayerInit=()=>{
 
 		audioProgressTiming.style.width =progress + '%';
 
-		const minutesPassed = Math.floor (currentTime / 60) || '0';
-		const secondsPassed =Math.floor (currentTime % 60) || '0';
+		const minutesPassed = Math.floor (currentTime / 60)||'0';
+		const secondsPassed =Math.floor (currentTime % 60)||'0';
 
-		const minutesTotal = Math.floor (duration / 60) || '0';
-		const secondsTotal = Math.floor (duration % 60) || '0';
+		const minutesTotal = Math.floor (duration / 60)||'0';
+		const secondsTotal = Math.floor (duration % 60)||'0';
 
 		audioTimePassed.textContent = `${addZero(minutesPassed)}:${addZero(secondsPassed)}`
 		audioTimeTotal.textContent = `${addZero(minutesTotal)}:${addZero(secondsTotal)}`
+
+
 	});
+
+	audioProgress.addEventListener('click', event =>{
+		const x = event.offsetX;
+		const allWidth = audioProgress.clientWidth;
+		const progress = (x/ allWidth) * audioPlayer.duration;
+		audioPlayer.currentTime = progress;
+	})
 };
